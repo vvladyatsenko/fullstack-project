@@ -5,8 +5,8 @@ import Cabinet from './pages/Cabinet/Cabinet';
 import Login from './pages/Login/Login';
 
 function App() {
-  const handleLoginSuccess = (token: string) => {
-    console.log('Login successful, token:', token);
+  const handleLoginSuccess = (token: string, username: string) => {
+    console.log('Login successful, token:', token, 'username:', username);
   };
 
   return (
@@ -15,12 +15,9 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<Register onRegisterSuccess={() => {}} />} />
             <Route path="/cabinet" element={<Cabinet />} />
-            <Route
-              path="/login"
-              element={<Login onLoginSuccess={handleLoginSuccess} />}
-            />
+            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
           </Routes>
         </div>
       </div>

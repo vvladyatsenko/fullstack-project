@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import style from './Register.module.scss';
 
-const Register: React.FC = () => {
+interface RegisterProps {
+  onRegisterSuccess: () => void;
+}
+
+const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +31,7 @@ const Register: React.FC = () => {
         password,
       });
       alert(response.data.message);
+      onRegisterSuccess();
     } catch (error) {
       console.error(error);
       setError('Error registering user');

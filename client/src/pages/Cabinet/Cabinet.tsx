@@ -15,6 +15,10 @@ const Cabinet = () => {
     console.log('Login successful, token:', token, 'username:', username);
   };
 
+  const handleRegisterSuccess = () => {
+    setIsRegistering(false);
+  };
+
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUser(null);
@@ -24,17 +28,15 @@ const Cabinet = () => {
   return (
     <>
       <Header
-        onCityChange={function (city: string): void {
-          throw new Error('Function not implemented.');
-        }}
+        onCityChange={() => {}}
         isCitySelectorDisabled={true}
         hideCabinetLink={true}
-      ></Header>
+      />
       <div className={styles.cabinet}>
         {!isAuthenticated ? (
           <>
             {isRegistering ? (
-              <Register />
+              <Register onRegisterSuccess={handleRegisterSuccess} />
             ) : (
               <Login onLoginSuccess={handleLoginSuccess} />
             )}
@@ -46,7 +48,9 @@ const Cabinet = () => {
           <div>
             <h2>Welcome to your Cabinet, {user?.username}</h2>
             <div className={styles.logoutContainer}>
-              <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
+              <button className={styles.logoutButton} onClick={handleLogout}>
+                Logout
+              </button>
             </div>
           </div>
         )}
