@@ -9,6 +9,27 @@
   box-shadow: $box-shadow;
   color: var(--text-color-default);
   border-radius: $border-radius;
+
+  .logoutContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logoutButton {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 25px;
+    color: $primary-color;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    transition: color 0.3s ease;
+    margin-top: 20px;
+
+    &:hover {
+      color: red;
+    }
+  }
 }
 
 .form {
