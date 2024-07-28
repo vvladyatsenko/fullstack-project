@@ -9,9 +9,14 @@ import { Link } from 'react-router-dom';
 interface Props {
   onCityChange: (city: string) => void;
   isCitySelectorDisabled?: boolean;
+  hideCabinetLink?: boolean;
 }
 
-export const Header = ({ onCityChange, isCitySelectorDisabled = false }: Props) => {
+export const Header = ({
+  onCityChange,
+  isCitySelectorDisabled = false,
+  hideCabinetLink = false,
+}: Props) => {
   const theme = useTheme();
   const [selectedCity, setSelectedCity] = useState({
     value: 'Kharkiv',
@@ -42,6 +47,7 @@ export const Header = ({ onCityChange, isCitySelectorDisabled = false }: Props) 
       borderRadius: '10px',
       cursor: 'pointer',
       zIndex: 100,
+      marginLeft: '20px',
     }),
     singleValue: (styles: any) => ({
       ...styles,
@@ -69,9 +75,11 @@ export const Header = ({ onCityChange, isCitySelectorDisabled = false }: Props) 
         </Link>
       </div>
       <div className={style.wrapper}>
-        <Link to="/cabinet" className={style.cabinet_link}>
-          Login / Registration
-        </Link>
+        {!hideCabinetLink && (
+          <Link to="/cabinet" className={style.cabinet_link}>
+            CABINET
+          </Link>
+        )}
       </div>
       <div className={style.wrapper}>
         <div className={style.change_theme} onClick={changeTheme}>

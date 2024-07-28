@@ -3,7 +3,7 @@ import axios from 'axios';
 import style from './Login.module.scss';
 
 interface Props {
-  onLoginSuccess: (token: string) => void;
+  onLoginSuccess: (token: string, username: string) => void;
 }
 
 const Login: React.FC<Props> = ({ onLoginSuccess }) => {
@@ -15,9 +15,12 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
     e.preventDefault();
     setError(null);
     try {
-      const response = await axios.post('/api/auth/login', { username, password });
+      const response = await axios.post('/api/auth/login', {
+        username,
+        password,
+      });
       localStorage.setItem('token', response.data.token);
-      onLoginSuccess(response.data.token);
+      onLoginSuccess(response.data.token, response.data.username);
     } catch (err) {
       setError('Login failed. Please check your credentials and try again.');
       console.error('Login error:', err);

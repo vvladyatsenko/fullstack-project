@@ -6,9 +6,20 @@ const Register: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    const usernameRegex = /^[a-zA-Z0-9!@#$%^&*()_+=-]+$/;
+    if (!usernameRegex.test(username)) {
+      setError(
+        'Username can only contain letters, numbers, and special characters.'
+      );
+      return;
+    }
+
     try {
       const response = await axios.post('/api/auth/register', {
         username,
@@ -16,17 +27,16 @@ const Register: React.FC = () => {
         password,
       });
       alert(response.data.message);
-
-      console.log(response)
     } catch (error) {
       console.error(error);
-      alert('Error registering user');
+      setError('Error registering user');
     }
   };
 
   return (
     <div className={style.register}>
-      <h2>Registration</h2>
+      <h2>Register</h2>
+      {error && <div className={style.error}>{error}</div>}
       <form onSubmit={handleRegister}>
         <div className={style.formGroup}>
           <label>Username</label>

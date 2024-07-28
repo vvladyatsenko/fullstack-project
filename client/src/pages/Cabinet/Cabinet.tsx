@@ -5,11 +5,15 @@ import Register from '../Register/Register';
 import { Header } from '../../shared/Header/Header';
 
 const Cabinet = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<{ token: string; username: string } | null>(
+    null
+  );
 
-  const handleLoginSuccess = (token: string) => {
-    console.log('Login successful, token:', token);
+  const handleLoginSuccess = (token: string, username: string) => {
+    setIsAuthenticated(true);
+    setUser({ token, username });
+    console.log('Login successful, token:', token, 'username:', username);
   };
 
   return (
@@ -19,10 +23,19 @@ const Cabinet = () => {
           throw new Error('Function not implemented.');
         }}
         isCitySelectorDisabled={true}
+        hideCabinetLink={true}
       ></Header>
       <div className={styles.cabinet}>
-        <Register></Register>
-        <Login onLoginSuccess={handleLoginSuccess}></Login>
+        {!isAuthenticated ? (
+          <>
+            <Register />
+            <Login onLoginSuccess={handleLoginSuccess} />
+          </>
+        ) : (
+          <div>
+            <h2>Welcome to your Cabinet, {user?.username}</h2>
+          </div>
+        )}
       </div>
     </>
   );
