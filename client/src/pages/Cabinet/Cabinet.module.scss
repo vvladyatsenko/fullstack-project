@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+.cabinet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(#{--components-background-default});
+  padding: 2rem;
+  box-shadow: $box-shadow;
+  color: var(--text-color-default);
+  border-radius: $border-radius;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+input {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid var(--base-color);
+  border-radius: var(--border-radius);
+}
+
+button {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+}
