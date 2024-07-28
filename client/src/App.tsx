@@ -3,6 +3,9 @@ import { Home } from './pages/Home/Home';
 import Register from './pages/Register/Register';
 import Cabinet from './pages/Cabinet/Cabinet';
 import Login from './pages/Login/Login';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function App() {
   const handleLoginSuccess = (token: string, username: string) => {
@@ -15,9 +18,15 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register onRegisterSuccess={() => {}} />} />
+            <Route
+              path="/register"
+              element={<Register onRegisterSuccess={() => {}} />}
+            />
             <Route path="/cabinet" element={<Cabinet />} />
-            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+            <Route
+              path="/login"
+              element={<Login onLoginSuccess={handleLoginSuccess} />}
+            />
           </Routes>
         </div>
       </div>
